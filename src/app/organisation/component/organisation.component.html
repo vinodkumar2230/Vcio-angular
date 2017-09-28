@@ -1,0 +1,111 @@
+<app-dashlayout></app-dashlayout>
+ 
+<div class="kendo">
+    <div class="container">
+
+           <div class="addbutton">
+            <app-addmodal></app-addmodal>
+ 
+
+        </div>
+        
+        <kendo-grid selectable="true"  [selectedKeys]="selectedKeys" [kendoGridSelectBy]="rowSelectionKey"  [data]="gridData" [pageSize]="state.take" [skip]="state.skip" [sort]="state.sort" [filter]="state.filter" [sortable]="true"
+            [pageable]="true" [height]="400" [filterable]="true" (pageChange)="pageChange($event)" (dataStateChange)="dataStateChange($event)">
+            <kendo-grid-column field="OrgId" title="ID" width="40" [filterable]="false">
+            </kendo-grid-column>
+            <kendo-grid-column field="OrgName" title="Organisatin Name" width="250">
+            </kendo-grid-column>
+            <kendo-grid-column field="ShortName" title="Short Name">
+            </kendo-grid-column>
+            <kendo-grid-column field="FirstName" title="First Name" width="80" [filterable]="false">
+            </kendo-grid-column>
+            <kendo-grid-column field="LastName" title="Last Name" width="80" [filterable]="false">
+            </kendo-grid-column>
+            <!--<kendo-grid-column field="Discontinued" title="Discontinued" width="120" filter="boolean" [filterable]="false">
+                <ng-template kendoGridCellTemplate let-dataItem>
+                    <input type="checkbox" [checked]="dataItem.Discontinued" disabled/>
+                </ng-template>
+            </kendo-grid-column>-->
+            <kendo-grid-column  field="Actions" title="Actions" width="150" [filterable]="false">
+                <ng-template  kendoGridCellTemplate >
+                    <button  kendoGridEditCommand class="k-primary"  (click)="openModal(template)" >Edit</button>
+                    <button class="btn btn-outline-danger btn-sm">Delete</button>
+                </ng-template>
+            </kendo-grid-column>
+        </kendo-grid>
+    </div>
+</div>
+<template #template>
+    <form [formGroup]="complexForm" (ngSubmit)="submitForm(complexForm.value)">
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Add Organisation</h4>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input   class="form-control" value="{{organistion.OrgId}}" type="text" placeholder="Organisation Name" [formControl]="complexForm.controls['OrgName']">
+                </div>
+                
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input   class="form-control" value="{{organistion.LastName}}" type="text" placeholder="Short Name" [formControl]="complexForm.controls['ShortName']">
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input (keypress)="_CharacterOnly($event)"  class="form-control" type="text" placeholder="First Name" [formControl]="complexForm.controls['FirstName']">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input (keypress)="_CharacterOnly($event)"  class="form-control" type="text" placeholder="Last Name" [formControl]="complexForm.controls['LastName']">
+                </div>
+            </div>
+        </div>
+
+         <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input (keypress)="_NumberOnly($event)"   class="form-control" type="text" placeholder="Phone Number" [formControl]="complexForm.controls['Phone']">
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group">
+                    <input  class="form-control" type="email" placeholder="Email" [formControl]="complexForm.controls['Email']">
+                </div>
+            </div>
+        </div>
+
+        
+
+
+
+        <div class="form-group">
+            <textarea  formControlName="Description" class="form-control txtarea" type="text" placeholder="Description" [formControl]="complexForm.controls['Description']"></textarea>
+        </div>
+
+
+        <div class="suru">
+            <button class="btn btn-primary submit" [disabled]="!complexForm.valid" (click)="modalRef.hide()">Submit</button>
+        </div>
+        
+    </div>
+
+    </form>
+    
+    <p> {{organistion.LastName}}</p>
+    
+</template>

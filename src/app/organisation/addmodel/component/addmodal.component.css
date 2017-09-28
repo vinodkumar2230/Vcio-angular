@@ -1,0 +1,21 @@
+.row{
+    padding-top:20px;
+}
+
+.suru[_ngcontent-c4] {
+    padding-top: 15px;
+    margin-left: 380px;
+    padding-bottom: 25px;
+}
+
+.modal-header{
+    background-color: #66ffff;
+}
+input[type="text"].ng-valid, input[type="email"].ng-valid, input[type="password"].ng-valid, input[type="date"].ng-valid, input[type="number"].ng-valid, input[type="file"].ng-valid, textarea.ng-valid, select.ng-valid {
+    background-color: #FFFFFF;
+    border-left: 5px solid #088b0b;
+}
+input[type="text"].ng-invalid, input[type="email"].ng-invalid, input[type="password"].ng-invalid, input[type="date"].ng-invalid, input[type="number"].ng-invalid, input[type="file"].ng-invalid, textarea.ng-invalid, select.ng-invalid {
+    border-left: 5px solid #ff0000;
+    background-color: #FFEBD6;
+}
